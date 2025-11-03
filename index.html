@@ -1,333 +1,208 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-bs-theme="light">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio profesional Ezequiel - Front-End Developer yang berpengalaman dalam membangun aplikasi web modern dan responsif">
-    <meta property="og:title" content="Ezequiel - Front-End Developer Portfolio">
-    <meta property="og:description" content="Lihat portfolio dan pengalaman kerja Ezequiel sebagai Front-End Developer">
-    <meta property="og:type" content="website">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Portfolio profesional Ezequiel - Front-End Developer yang berpengalaman dalam membangun aplikasi web modern dan responsif" />
+    <meta property="og:title" content="Ezequiel - Front-End Developer Portfolio" />
+    <meta property="og:description" content="Lihat portfolio dan pengalaman kerja Ezequiel sebagai Front-End Developer" />
+    <meta property="og:type" content="website" />
     <title>Ezequiel - Front-End Developer | CV & Portfolio</title>
 
+    <!-- Bootstrap & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
     <style>
-        /* ========== CSS VARIABLES ========== */
+        /* ====== THEME TOKENS ====== */
         
          :root {
             --primary-bg: #fafafa;
             --secondary-bg: #ffffff;
             --card-bg: #ffffff;
-            --text-dark: #1a1a1a;
-            --text-medium: #4a5568;
-            --text-light: #718096;
+            --text-dark: #0f172a;
+            --text-medium: #475569;
+            --text-light: #94a3b8;
             --accent-primary: #3b82f6;
             --accent-secondary: #2563eb;
             --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --border-color: #e2e8f0;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
-            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+            --radius: .9rem;
         }
         
-        [data-theme="dark"] {
-            --primary-bg: #0f172a;
-            --secondary-bg: #1e293b;
-            --card-bg: #1e293b;
-            --text-dark: #f1f5f9;
-            --text-medium: #cbd5e1;
-            --text-light: #94a3b8;
+        [data-bs-theme="dark"] {
+            --primary-bg: #0b1324;
+            --secondary-bg: #0f192f;
+            --card-bg: #111f38;
+            --text-dark: #e8edf6;
+            --text-medium: #bac7da;
+            --text-light: #8fa3c5;
             --accent-primary: #60a5fa;
             --accent-secondary: #3b82f6;
-            --border-color: #334155;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4);
-            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-        
+        html,
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--primary-bg);
+            background: var(--primary-bg);
             color: var(--text-dark);
-            line-height: 1.7;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease;
         }
         
-        .container {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        .bg-soft {
+            background: var(--secondary-bg);
         }
         
-        .container-wide {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        .border-soft {
+            border: 1px solid rgba(0, 0, 0, .08);
         }
-        /* HEADER & NAVIGATION */
         
-        header {
+        [data-bs-theme="dark"] .border-soft {
+            border-color: rgba(255, 255, 255, .1)
+        }
+        
+        .btn-gradient {
+            background: var(--accent-gradient);
+            color: #fff;
+        }
+        
+        .btn-gradient:hover {
+            opacity: .95;
+        }
+        
+        .gradient-text {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-tag {
+            display: inline-block;
+            padding: .35rem .9rem;
+            background: var(--accent-gradient);
+            color: #fff;
+            border-radius: 999px;
+            font-size: .85rem;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            font-weight: 800;
+            letter-spacing: -.3px;
+        }
+        
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        
+        .page {
+            display: none;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        /* ====== NAVBAR (glass + underline + active bar) ====== */
+        
+        .navbar-glass {
+            background: rgba(255, 255, 255, .6);
+            backdrop-filter: saturate(1.2) blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, .06);
+        }
+        
+        [data-bs-theme="dark"] .navbar-glass {
+            background: rgba(15, 23, 42, .6);
+            border-color: rgba(255, 255, 255, .08);
+        }
+        
+        .nav-rail {
+            position: relative;
+        }
+        
+        .nav-active-bar {
+            position: absolute;
+            bottom: -6px;
+            height: 3px;
+            width: 0;
+            left: 0;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+            transition: all .25s ease;
+            display: none;
+        }
+        
+        @media (min-width: 992px) {
+            .nav-active-bar {
+                display: block;
+            }
+        }
+        
+        .nav-link {
+            position: relative;
+            color: var(--text-medium)!important;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover,
+        .nav-link:focus {
+            color: var(--accent-primary)!important;
+        }
+        
+        .nav-link.nav-underline::after {
+            content: '';
+            position: absolute;
+            left: 8px;
+            right: 8px;
+            bottom: -6px;
+            height: 2px;
+            border-radius: 2px;
+            background: transparent;
+            transition: background .2s ease, transform .2s ease;
+            transform: scaleX(0);
+        }
+        
+        .nav-link.nav-underline:hover::after {
+            background: var(--accent-primary);
+            transform: scaleX(1);
+        }
+        
+        .nav-link.active {
+            color: var(--accent-primary)!important;
+            font-weight: 700;
+        }
+        
+        .offcanvas-end {
+            width: 320px;
+        }
+        /* ====== SCROLL PROGRESS ====== */
+        
+        #scrollProgress {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 999;
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-        
-        [data-theme="dark"] header {
-            background: rgba(15, 23, 42, 0.95);
-        }
-        
-        header.scrolled {
-            box-shadow: var(--shadow-md);
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.25rem 0;
-        }
-        
-        .logo {
-            font-size: 1.75rem;
-            font-weight: 800;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-            letter-spacing: -0.5px;
-            cursor: pointer;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-            align-items: center;
-        }
-        
-        .nav-links a {
-            color: var(--text-medium);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-primary);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--accent-primary);
-        }
-        
-        .nav-links a.active::before {
-            width: 100%;
-        }
-        
-        .theme-switcher {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            transition: all 0.3s ease;
-        }
-        
-        .theme-switcher:hover {
-            transform: scale(1.1);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .burger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-        
-        .burger span {
-            width: 25px;
             height: 3px;
-            background: var(--text-dark);
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-        /* HERO SECTION */
-        
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 80px;
-            background: var(--secondary-bg);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: -10%;
-            width: 600px;
-            height: 600px;
+            width: 0;
             background: var(--accent-gradient);
-            opacity: 0.08;
-            border-radius: 50%;
-            filter: blur(80px);
+            z-index: 2000;
         }
+        /* ====== HERO (blob + floating + orbs) ====== */
         
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+        .blob-wrapper {
             position: relative;
-            z-index: 1;
+            max-width: 470px;
+            margin-inline: auto;
         }
         
-        .hero-text h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-        
-        .hero-text .gradient-text {
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-text p {
-            font-size: 1.25rem;
-            color: var(--text-medium);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-        
-        .hero-stats {
-            display: flex;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .stat-item {
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent-primary);
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-top: 0.25rem;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 0.875rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        
-        .btn-primary {
-            background: var(--accent-gradient);
-            color: white;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            color: var(--accent-primary);
-            border: 2px solid var(--accent-primary);
-        }
-        
-        .btn-outline:hover {
-            background: var(--accent-primary);
-            color: white;
-        }
-        
-        .hero-image {
-            position: relative;
-        }
-        
-        .hero-image-wrapper {
-            position: relative;
+        .blob {
             width: 100%;
-            aspect-ratio: 1;
-            max-width: 450px;
-            margin: 0 auto;
-        }
-        
-        .profile-img {
-            width: 100%;
-            height: 100%;
+            aspect-ratio: 1/1;
             object-fit: cover;
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            box-shadow: var(--shadow-xl);
-            animation: morph 8s ease-in-out infinite;
             border: 5px solid var(--accent-primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .2);
+            animation: morph 8s ease-in-out infinite;
+            will-change: border-radius;
         }
         
         @keyframes morph {
@@ -343,1651 +218,1491 @@
         .floating-card {
             position: absolute;
             background: var(--card-bg);
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(0, 0, 0, .08);
+            padding: .85rem 1rem;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
             display: flex;
+            gap: .5rem;
             align-items: center;
-            gap: 0.75rem;
             animation: float 3s ease-in-out infinite;
         }
         
         @keyframes float {
             0%,
             100% {
-                transform: translateY(0px);
+                transform: translateY(0)
             }
             50% {
-                transform: translateY(-20px);
+                transform: translateY(-10px)
             }
         }
         
-        .floating-card-1 {
-            top: 10%;
+        .floating-1 {
+            top: 8%;
             right: -10%;
-            animation-delay: 0s;
         }
         
-        .floating-card-2 {
-            bottom: 15%;
+        .floating-2 {
+            bottom: 8%;
             left: -10%;
             animation-delay: 1s;
         }
         
-        .floating-icon {
-            font-size: 2rem;
-        }
-        
-        .floating-text {
-            font-size: 0.9rem;
-            color: var(--text-medium);
-        }
-        
-        .floating-value {
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-        /* SECTION STYLES */
-        
-        section {
-            padding: 6rem 0;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s ease;
-        }
-        
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        
-        .section-tag {
-            display: inline-block;
-            padding: 0.5rem 1.25rem;
-            background: var(--accent-gradient);
-            color: white;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            letter-spacing: 0.5px;
-        }
-        
-        .section-title {
-            font-size: 2.75rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-        
-        .section-description {
-            font-size: 1.15rem;
-            color: var(--text-medium);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        /* ABOUT SECTION */
-        
-        .about {
-            background: var(--primary-bg);
-        }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        
-        .about-image-wrapper {
-            position: relative;
-        }
-        
-        .about-image-bg {
-            width: 100%;
-            aspect-ratio: 3/4;
-            background: var(--accent-gradient);
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .about-image-bg::before {
-            content: '💻';
-            font-size: 15rem;
-            position: absolute;
+        .floating-3 {
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0.3;
+            right: -14%;
+            transform: translateY(-50%);
         }
         
-        .about-text h3 {
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-dark);
+        @media (max-width: 1200px) {
+            .floating-3 {
+                right: -8%;
+            }
         }
         
-        .about-text p {
-            color: var(--text-medium);
-            margin-bottom: 1.25rem;
-            line-height: 1.8;
+        @media (max-width: 992px) {
+            .floating-3 {
+                display: none !important;
+            }
         }
         
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.25rem;
-            margin-top: 2rem;
-        }
-        
-        .info-box {
-            padding: 1.25rem;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-        
-        .info-box:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-            border-color: var(--accent-primary);
-        }
-        
-        .info-box-label {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-        }
-        
-        .info-box-value {
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-        
-        .info-box-value a {
-            color: var(--accent-primary);
-            text-decoration: none;
-        }
-        /* EXPERIENCE SECTION */
-        
-        .experience {
-            background: var(--secondary-bg);
-        }
-        
-        .timeline {
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .timeline::before {
-            content: '';
+        .hero-splash .orb {
             position: absolute;
-            left: 30px;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: var(--accent-gradient);
-        }
-        
-        .timeline-item {
-            position: relative;
-            padding-left: 80px;
-            margin-bottom: 3rem;
-        }
-        
-        .timeline-dot {
-            position: absolute;
-            left: 18px;
-            top: 8px;
-            width: 24px;
-            height: 24px;
-            background: var(--accent-primary);
             border-radius: 50%;
-            border: 4px solid var(--secondary-bg);
-            box-shadow: 0 0 0 4px var(--accent-primary);
+            filter: blur(70px);
+            opacity: .25;
+            pointer-events: none;
         }
         
-        .timeline-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-        }
-        
-        .timeline-card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateX(10px);
-        }
-        
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1.25rem;
-        }
-        
-        .timeline-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
-        
-        .timeline-company {
-            color: var(--accent-primary);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        
-        .timeline-date {
-            background: var(--primary-bg);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            color: var(--text-medium);
-            white-space: nowrap;
-        }
-        
-        .timeline-list {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-        
-        .timeline-list li {
-            color: var(--text-medium);
-            padding-left: 1.5rem;
-            position: relative;
-            margin-bottom: 0.75rem;
-        }
-        
-        .timeline-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent-primary);
-            font-weight: 700;
-        }
-        
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        
-        .tech-badge {
-            padding: 0.375rem 1rem;
-            background: var(--primary-bg);
-            color: var(--accent-primary);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        /* SKILLS SECTION */
-        
-        .skills {
-            background: var(--primary-bg);
-        }
-        
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        
-        .skill-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--accent-primary);
-        }
-        
-        .skill-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .skill-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-        
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            justify-content: center;
-        }
-        
-        .skill-item {
-            padding: 0.5rem 1rem;
-            background: var(--primary-bg);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            color: var(--text-medium);
-            font-weight: 500;
-        }
-        /* PROJECTS SECTION */
-        
-        .projects {
-            background: var(--secondary-bg);
-        }
-        
-        .project-filters {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-        
-        .filter-btn {
-            padding: 0.75rem 1.5rem;
-            background: var(--card-bg);
-            border: 2px solid var(--border-color);
-            border-radius: 30px;
-            color: var(--text-medium);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .filter-btn:hover,
-        .filter-btn.active {
+        .orb-1 {
+            width: 380px;
+            height: 380px;
             background: var(--accent-gradient);
-            color: white;
-            border-color: transparent;
+            top: -60px;
+            right: -120px;
         }
         
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
+        .orb-2 {
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(closest-side, #22c55e, transparent);
+            bottom: -80px;
+            left: -60px;
         }
         
-        .project-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-        
-        .project-card.hidden {
-            display: none;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .project-thumbnail {
-            width: 100%;
+        .orb-3 {
+            width: 220px;
             height: 220px;
-            background: var(--accent-gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            position: relative;
-            overflow: hidden;
+            background: radial-gradient(closest-side, #f59e0b, transparent);
+            top: 30%;
+            left: 45%;
         }
         
-        .project-thumbnail::after {
-            content: '';
+        .hero-photo {
+            isolation: isolate;
+        }
+        
+        .photo-glow {
+            content: "";
             position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
+            inset: -12px;
+            border-radius: 38%;
+            background: conic-gradient(from 0deg, #60a5fa, #a78bfa, #f472b6, #60a5fa);
+            filter: blur(30px);
+            opacity: .25;
+            z-index: -1;
+        }
+        /* ====== Cards / thumbs / icons ====== */
+        
+        .card-hover {
+            transition: transform .2s ease, box-shadow .2s ease;
+            border-radius: var(--radius);
         }
         
-        .project-body {
-            padding: 2rem;
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, .12);
         }
         
-        .project-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-        
-        .project-description {
-            color: var(--text-medium);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-        
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .project-tag {
-            padding: 0.375rem 0.875rem;
-            background: var(--primary-bg);
-            color: var(--accent-primary);
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .project-link {
-            flex: 1;
-            padding: 0.75rem;
-            text-align: center;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .project-link-primary {
-            background: var(--accent-primary);
-            color: white;
-        }
-        
-        .project-link-primary:hover {
-            background: var(--accent-secondary);
-        }
-        
-        .project-link-secondary {
-            background: var(--primary-bg);
-            color: var(--accent-primary);
-        }
-        
-        .project-link-secondary:hover {
-            background: var(--accent-primary);
-            color: white;
-        }
-        /* HOBBIES SECTION */
-        
-        .hobbies {
-            background: var(--primary-bg);
-        }
-        
-        .hobbies-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .hobby-card {
-            position: relative;
-            aspect-ratio: 1;
-            border-radius: 16px;
+        .thumb {
             overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            border-radius: calc(var(--radius) - .25rem);
         }
         
-        .hobby-card:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .hobby-bg {
+        .thumb img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
+            transition: transform .6s ease;
+        }
+        
+        .card-hover:hover .thumb img {
+            transform: scale(1.05);
+        }
+        
+        .icon-wrap {
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 50%;
             background: var(--accent-gradient);
-            display: flex;
+            color: #fff;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 5rem;
-        }
-        
-        .hobby-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            display: flex;
-            align-items: flex-end;
-            padding: 1.5rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .hobby-card:hover .hobby-overlay {
-            opacity: 1;
-        }
-        
-        .hobby-name {
-            color: white;
-            font-weight: 700;
-            font-size: 1.25rem;
-        }
-        /* MODAL LIGHTBOX */
-        
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 9999;
-            padding: 2rem;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal.active {
-            display: flex;
-        }
-        
-        .modal-content {
-            max-width: 600px;
-            text-align: center;
-        }
-        
-        .modal-icon {
-            font-size: 8rem;
-            margin-bottom: 1rem;
-        }
-        
-        .modal-title {
-            color: white;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .modal-description {
-            color: rgba(255, 255, 255, 0.8);
             font-size: 1.1rem;
         }
         
-        .modal-close {
+        .ribbon {
             position: absolute;
-            top: 2rem;
-            right: 2rem;
-            background: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            top: .75rem;
+            left: .75rem;
+            z-index: 2;
+            background: rgba(34, 197, 94, .95);
+            color: #fff;
+            font-size: .75rem;
+            padding: .2rem .5rem;
+            border-radius: .4rem;
         }
         
-        .modal-close:hover {
-            transform: scale(1.1) rotate(90deg);
+        .ratio-21x9 {
+            --bs-aspect-ratio: 42.857%;
         }
-        /* CERTIFICATES SECTION */
+        /* ====== Timeline ====== */
         
-        .certificates {
-            background: var(--secondary-bg);
-        }
-        
-        .certificates-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        
-        .cert-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
+        .timeline {
+            border-left: 4px solid rgba(99, 102, 241, .35);
+            padding-left: 1rem;
             position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
         }
         
-        .cert-card::before {
-            content: '🎓';
+        .timeline .dot {
+            width: 14px;
+            height: 14px;
+            background: var(--accent-primary);
+            border-radius: 50%;
             position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 8rem;
-            opacity: 0.05;
+            left: -9px;
+            top: .5rem;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, .25);
+        }
+        /* ====== Reveal ====== */
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .6s ease, transform .6s ease;
+            will-change: opacity, transform;
         }
         
-        .cert-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--accent-primary);
+        .reveal.show {
+            opacity: 1;
+            transform: none;
         }
         
-        .cert-badge {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: var(--accent-gradient);
-            color: white;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 1rem;
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-24px);
         }
         
-        .cert-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            color: var(--text-dark);
+        .reveal-left.show {
+            opacity: 1;
+            transform: none;
         }
         
-        .cert-issuer {
-            color: var(--accent-primary);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(24px);
         }
         
-        .cert-date {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+        .reveal-right.show {
+            opacity: 1;
+            transform: none;
+        }
+        /* ====== Quick values & mini stat ====== */
+        
+        .mini-stat {
+            background: var(--card-bg);
         }
         
-        .cert-id {
-            color: var(--text-medium);
-            font-size: 0.85rem;
-            font-family: 'Courier New', monospace;
-            margin-bottom: 1rem;
-        }
-        
-        .cert-link {
-            color: var(--accent-primary);
-            text-decoration: none;
-            font-weight: 600;
+        .quick-value {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 0, 0, .08);
+            padding: .6rem .9rem;
+            border-radius: 999px;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: .5rem;
+            box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .06);
+        }
+        /* ====== Typed caret ====== */
+        
+        .typed-caret {
+            display: inline-block;
+            width: 10px;
+            height: 1.25rem;
+            translate: 0 .2rem;
+            border-right: 2px solid currentColor;
+            animation: blink 1s steps(1) infinite;
         }
         
-        .cert-link:hover {
-            text-decoration: underline;
-        }
-        /* CONTACT SECTION */
-        
-        .contact {
-            background: var(--primary-bg);
-        }
-        
-        .contact-wrapper {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .contact-form {
-            background: var(--card-bg);
-            padding: 3rem;
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            background: var(--primary-bg);
-            color: var(--text-dark);
-            font-family: inherit;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-        
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-        
-        .success-message {
-            display: none;
-            background: #10b981;
-            color: white;
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        
-        .success-message.show {
-            display: block;
-        }
-        
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-        
-        .contact-box {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .contact-box:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-            border-color: var(--accent-primary);
-        }
-        
-        .contact-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .contact-label {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-        }
-        
-        .contact-value {
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        .social-link {
-            width: 50px;
-            height: 50px;
-            background: var(--card-bg);
-            border: 2px solid var(--border-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            background: var(--accent-gradient);
-            border-color: transparent;
-            transform: translateY(-5px);
-        }
-        /* FOOTER */
-        
-        footer {
-            background: var(--secondary-bg);
-            padding: 3rem 0;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-        
-        .scroll-top-btn {
-            width: 50px;
-            height: 50px;
-            background: var(--accent-gradient);
-            border: none;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .scroll-top-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .footer-text {
-            color: var(--text-medium);
-        }
-        /* RESPONSIVE DESIGN */
-        
-        @media (max-width: 968px) {
-            .nav-links {
-                position: fixed;
-                left: -100%;
-                top: 70px;
-                flex-direction: column;
-                background: var(--card-bg);
-                width: 100%;
-                padding: 2rem;
-                box-shadow: var(--shadow-lg);
-                transition: left 0.3s ease;
-                gap: 1.5rem;
-            }
-            .nav-links.active {
-                left: 0;
-            }
-            .burger {
-                display: flex;
-            }
-            .burger.active span:nth-child(1) {
-                transform: rotate(45deg) translateY(8px);
-            }
-            .burger.active span:nth-child(2) {
-                opacity: 0;
-            }
-            .burger.active span:nth-child(3) {
-                transform: rotate(-45deg) translateY(-8px);
-            }
-            .hero-content,
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-            .section-title {
-                font-size: 2rem;
-            }
-            .floating-card {
-                display: none;
-            }
-            .projects-grid {
-                grid-template-columns: 1fr;
+        @keyframes blink {
+            50% {
+                opacity: 0
             }
         }
+        /* Reduce motion */
         
-        @media (max-width: 640px) {
-            .container,
-            .container-wide {
-                padding: 0 1rem;
+        @media (prefers-reduced-motion: reduce) {
+            .blob {
+                animation: none
             }
-            .hero-text h1 {
-                font-size: 2rem;
+            .photo-glow,
+            .orb-1,
+            .orb-2,
+            .orb-3 {
+                display: none
             }
-            .hero-text p {
-                font-size: 1rem;
-            }
-            .hero-stats {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            .timeline::before {
-                left: 15px;
-            }
-            .timeline-item {
-                padding-left: 50px;
-            }
-            .timeline-dot {
-                left: 6px;
-            }
-            .timeline-header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .contact-form {
-                padding: 1.5rem;
+            .card-hover:hover {
+                transform: none;
+                box-shadow: none;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- HEADER & NAVIGATION -->
-    <header id="header">
+    <div id="scrollProgress"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-glass sticky-top" aria-label="Navigasi utama">
         <div class="container">
-            <nav>
-                <a href="#beranda" class="logo">Ezequiel</a>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="#beranda" class="active">Beranda</a></li>
-                    <li><a href="#tentang">Tentang</a></li>
-                    <li><a href="#pengalaman">Pengalaman</a></li>
-                    <li><a href="#keahlian">Keahlian</a></li>
-                    <li><a href="#proyek">Proyek</a></li>
-                    <li><a href="#hobi">Hobi</a></li>
-                    <li><a href="#sertifikat">Sertifikat</a></li>
-                    <li><a href="#kontak">Kontak</a></li>
-                </ul>
-                <div style="display: flex; align-items: center; gap: 1rem;">
-                    <button class="theme-switcher" id="themeSwitcher" aria-label="Toggle tema">🌙</button>
-                    <div class="burger" id="burger">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
+            <a class="navbar-brand fw-bold gradient-text" href="#/beranda">Ezequiel</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav" aria-label="Buka menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNav" aria-label="Menu">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title fw-bold">Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Tutup menu"></button>
                 </div>
-            </nav>
-        </div>
-    </header>
-
-    <!-- HERO SECTION -->
-    <section class="hero visible" id="beranda">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>
-                        Halo, Saya <br>
-                        <span class="gradient-text">Ezequiel</span>
-                    </h1>
-                    <p>Front-End Developer yang passionate dalam menciptakan pengalaman web yang indah, cepat, dan accessible untuk semua orang.</p>
-
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">3+</div>
-                            <div class="stat-label">Tahun Pengalaman</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">50+</div>
-                            <div class="stat-label">Proyek Selesai</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">100%</div>
-                            <div class="stat-label">Kepuasan Klien</div>
-                        </div>
-                    </div>
-
-                    <div class="hero-buttons">
-                        <a href="#" class="btn btn-primary">📄 Unduh CV</a>
-                        <a href="#kontak" class="btn btn-outline">💬 Hubungi Saya</a>
-                    </div>
-                </div>
-
-                <div class="hero-image">
-                    <div class="hero-image-wrapper">
-                        <img src="i'm.jpeg" alt="Foto profil Ezequiel" class="profile-img">
-                    </div>
-
-                    <div class="floating-card floating-card-1">
-                        <div class="floating-icon">⚡</div>
-                        <div>
-                            <div class="floating-text">Kode Berkualitas</div>
-                            <div class="floating-value">Clean & Efficient</div>
-                        </div>
-                    </div>
-
-                    <div class="floating-card floating-card-2">
-                        <div class="floating-icon">🚀</div>
-                        <div>
-                            <div class="floating-text">Performa</div>
-                            <div class="floating-value">Super Cepat</div>
-                        </div>
-                    </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2 nav-rail">
+                        <span id="navActiveBar" class="nav-active-bar"></span>
+                        <li class="nav-item"><a class="nav-link nav-underline" data-route-link href="#/beranda">Beranda</a></li>
+                        <li class="nav-item"><a class="nav-link nav-underline" data-route-link href="#/tentang">About</a></li>
+                        <li class="nav-item"><a class="nav-link nav-underline" data-route-link href="#/pengalaman">Experience</a></li>
+                        <li class="nav-item"><a class="nav-link nav-underline" data-route-link href="#/keahlian">Experttise</a></li>
+                        <li class="nav-item"><a class="nav-link nav-underline" data-route-link href="#/proyek">Project</a></li>
+                        <li class="nav-item"><a class="nav-link nav-underline" data-route-link href="#/hobi">Hobby</a></li>
+                        <li class="nav-item"><a class="nav-link nav-underline" data-route-link href="#/sertifikat">Sertifikat</a></li>
+                        <li class="nav-item"><a class="nav-link nav-underline" data-route-link href="#/kontak">Kontak</a></li>
+                        <li class="nav-item ms-lg-3">
+                            <button id="themeToggle" class="btn btn-outline-secondary rounded-circle" aria-label="Ganti tema">
+                <i class="bi bi-moon"></i>
+              </button>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </section>
+    </nav>
 
-    <!-- ABOUT SECTION -->
-    <section class="about" id="tentang">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">TENTANG SAYA</span>
-                <h2 class="section-title">Kenalan Lebih Dekat</h2>
-            </div>
+    <!-- ================== PAGES ================== -->
+    <main id="konten" tabindex="-1">
 
-            <div class="about-content">
-                <div class="about-image-wrapper">
-                    <div class="about-image-bg"></div>
-                </div>
+        <!-- BERANDA -->
+        <section id="page-beranda" class="page active">
+            <!-- HERO -->
+            <div class="hero-splash py-5 position-relative overflow-hidden bg-soft">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+                <div class="orb orb-3"></div>
 
-                <div class="about-text">
-                    <h3>Pengembang Front-End yang Bersemangat</h3>
-                    <p>
-                        Saya adalah seorang Front-End Developer dengan pengalaman lebih dari 3 tahun dalam membangun aplikasi web modern yang responsif dan user-friendly. Fokus utama saya adalah menciptakan pengalaman pengguna yang luar biasa melalui kode yang bersih dan maintainable.
-                    </p>
-                    <p>
-                        Dengan keahlian mendalam dalam React, TypeScript, dan ekosistem JavaScript modern, saya selalu bersemangat untuk mempelajari teknologi baru dan menerapkan best practices dalam setiap proyek yang saya kerjakan.
-                    </p>
-
-                    <div class="info-grid">
-                        <div class="info-box">
-                            <div class="info-box-label">📍 Lokasi</div>
-                            <div class="info-box-value">Jakarta, Indonesia</div>
-                        </div>
-                        <div class="info-box">
-                            <div class="info-box-label">📧 Email</div>
-                            <div class="info-box-value"><a href="mailto:ezequiel@email.com">ezequiel@email.com</a></div>
-                        </div>
-                        <div class="info-box">
-                            <div class="info-box-label">📱 Telepon</div>
-                            <div class="info-box-value">+62 812-3456-7890</div>
-                        </div>
-                        <div class="info-box">
-                            <div class="info-box-label">💼 Status</div>
-                            <div class="info-box-value">Tersedia Freelance</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- EXPERIENCE SECTION -->
-    <section class="experience" id="pengalaman">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">PENGALAMAN</span>
-                <h2 class="section-title">Perjalanan Karir Saya</h2>
-                <p class="section-description">Pengalaman profesional dalam membangun produk digital berkualitas tinggi</p>
-            </div>
-
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-card">
-                        <div class="timeline-header">
-                            <div>
-                                <h3 class="timeline-title">Senior Front-End Developer</h3>
-                                <p class="timeline-company">TechCorp Indonesia</p>
+                <div class="container position-relative">
+                    <div class="row align-items-center g-5">
+                        <!-- Kiri -->
+                        <div class="col-lg-6 reveal-left">
+                            <div class="d-flex align-items-center gap-2 mb-3 flex-wrap">
+                                <span class="badge rounded-pill text-bg-primary d-inline-flex align-items-center gap-2">
+                  <i class="bi bi-lightning-charge-fill"></i> Tersedia Freelance
+                </span>
+                                <span class="badge rounded-pill text-bg-secondary d-inline-flex align-items-center gap-2">
+                  <i class="bi bi-geo-alt-fill"></i> Malang, Indonesia
+                </span>
                             </div>
-                            <div class="timeline-date">Jan 2023 - Sekarang</div>
-                        </div>
-                        <ul class="timeline-list">
-                            <li>Memimpin pengembangan dashboard analytics yang meningkatkan engagement 45%</li>
-                            <li>Optimasi performa aplikasi dengan code splitting, mengurangi loading time 57%</li>
-                            <li>Mentoring 3 junior developer dalam React dan TypeScript best practices</li>
-                            <li>Implementasi design system yang digunakan oleh 5 tim berbeda</li>
-                        </ul>
-                        <div class="tech-stack">
-                            <span class="tech-badge">React</span>
-                            <span class="tech-badge">TypeScript</span>
-                            <span class="tech-badge">Next.js</span>
-                            <span class="tech-badge">GraphQL</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-card">
-                        <div class="timeline-header">
-                            <div>
-                                <h3 class="timeline-title">Front-End Developer</h3>
-                                <p class="timeline-company">Digital Solutions Ltd</p>
+                            <p class="mb-2 small text-uppercase text-secondary">Beranda</p>
+                            <h1 class="display-5 fw-800 mb-2">
+                                Halo, Saya <br />
+                                <span class="gradient-text">Ezequiel Alaghate Tchuda</span>
+                            </h1>
+
+                            <p class="lead text-secondary mb-2">
+                                Front-End Developer yang passionate dalam menciptakan pengalaman web yang indah, cepat, dan accessible untuk semua orang.
+                            </p>
+
+                            <p class="text-secondary mb-4">
+                                Fokus pada <span class="fw-semibold" id="typedRoles">React • TypeScript • Next.js</span><span class="typed-caret" aria-hidden="true"></span>
+                            </p>
+
+                            <!-- Counters (asli) -->
+                            <div class="row text-center g-3 my-4">
+                                <div class="col-4">
+                                    <div class="p-3 border-soft rounded-3 mini-stat">
+                                        <div class="fs-3 fw-bold text-primary counter" data-count-to="1">0</div>
+                                        <div class="small text-secondary">Experience Years</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-3 border-soft rounded-3 mini-stat">
+                                        <div class="fs-3 fw-bold text-primary counter" data-count-to="1">0</div>
+                                        <div class="small text-secondary">Project Completed</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-3 border-soft rounded-3 mini-stat">
+                                        <div class="fs-3 fw-bold text-primary">50%</div>
+                                        <div class="small text-secondary">Client Satisfaction</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="timeline-date">Jun 2021 - Des 2022</div>
+
+                            <!-- Counters tambahan (dummy) -->
+                            <div class="row text-center g-3 mb-3">
+                                <div class="col-4">
+                                    <div class="p-3 border-soft rounded-3 mini-stat">
+                                        <div class="fs-3 fw-bold text-primary counter" data-count-to="4">0</div>
+                                        <div class="small text-secondary">Certifications (Dummy)</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-3 border-soft rounded-3 mini-stat">
+                                        <div class="fs-3 fw-bold text-primary counter" data-count-to="95">0</div>
+                                        <div class="small text-secondary">Lighthouse Score (Dummy)</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-3 border-soft rounded-3 mini-stat">
+                                        <div class="fs-3 fw-bold text-primary counter" data-count-to="12">0</div>
+                                        <div class="small text-secondary">OSS PRs (Dummy)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CTA -->
+                            <div class="d-flex flex-wrap gap-2">
+                                <a class="btn btn-gradient px-4 d-inline-flex align-items-center gap-2" href="#">
+                                    <i class="bi bi-file-earmark-arrow-down"></i> Unduh CV
+                                </a>
+                                <a class="btn btn-outline-primary px-4 d-inline-flex align-items-center gap-2" href="#/kontak">
+                                    <i class="bi bi-chat-dots"></i> Hubungi Saya
+                                </a>
+                                <a class="btn btn-outline-secondary px-4 d-inline-flex align-items-center gap-2" href="#/proyek">
+                                    <i class="bi bi-collection"></i> Lihat Proyek
+                                </a>
+                            </div>
                         </div>
-                        <ul class="timeline-list">
-                            <li>Membangun e-commerce platform dengan 10,000+ transaksi bulanan</li>
-                            <li>Implementasi PWA yang meningkatkan mobile engagement 60%</li>
-                            <li>Kolaborasi dengan UI/UX untuk menciptakan pengalaman intuitif</li>
-                        </ul>
-                        <div class="tech-stack">
-                            <span class="tech-badge">React</span>
-                            <span class="tech-badge">Redux</span>
-                            <span class="tech-badge">SASS</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- SKILLS SECTION -->
-    <section class="skills" id="keahlian">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">KEAHLIAN</span>
-                <h2 class="section-title">Teknologi & Kompetensi</h2>
-                <p class="section-description">Stack teknologi yang saya kuasai</p>
-            </div>
+                        <!-- Kanan -->
+                        <div class="col-lg-6 reveal-right">
+                            <div class="blob-wrapper position-relative hero-photo tilt">
+                                <img src="i'm.png" alt="Foto profil Ezequiel" class="blob" loading="lazy" />
+                                <div class="photo-glow"></div>
 
-            <div class="skills-container">
-                <div class="skill-card">
-                    <div class="skill-icon">⚛️</div>
-                    <h3 class="skill-title">Framework</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">React</span>
-                        <span class="skill-item">Next.js</span>
-                        <span class="skill-item">Vue.js</span>
-                    </div>
-                </div>
+                                <div class="floating-card floating-1 tilt-inner">
+                                    <div class="fs-3">⚡</div>
+                                    <div>
+                                        <div class="small text-secondary">Kode Berkualitas</div>
+                                        <div class="fw-bold">Clean &amp; Efficient</div>
+                                    </div>
+                                </div>
 
-                <div class="skill-card">
-                    <div class="skill-icon">🎨</div>
-                    <h3 class="skill-title">Styling</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">Tailwind CSS</span>
-                        <span class="skill-item">SASS/SCSS</span>
-                        <span class="skill-item">Material-UI</span>
-                    </div>
-                </div>
+                                <div class="floating-card floating-2 tilt-inner">
+                                    <div class="fs-3">🚀</div>
+                                    <div>
+                                        <div class="small text-secondary">Performa</div>
+                                        <div class="fw-bold">Super Cepat</div>
+                                    </div>
+                                </div>
 
-                <div class="skill-card">
-                    <div class="skill-icon">🔧</div>
-                    <h3 class="skill-title">Tools</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">Git & GitHub</span>
-                        <span class="skill-item">VS Code</span>
-                        <span class="skill-item">Docker</span>
-                    </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">✅</div>
-                    <h3 class="skill-title">Testing</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">Jest</span>
-                        <span class="skill-item">Cypress</span>
-                        <span class="skill-item">ESLint</span>
-                    </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">🌐</div>
-                    <h3 class="skill-title">API</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">REST API</span>
-                        <span class="skill-item">GraphQL</span>
-                        <span class="skill-item">Firebase</span>
-                    </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-icon">🤝</div>
-                    <h3 class="skill-title">Soft Skills</h3>
-                    <div class="skill-list">
-                        <span class="skill-item">Problem Solving</span>
-                        <span class="skill-item">Kolaborasi Tim</span>
-                        <span class="skill-item">Agile/Scrum</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROJECTS SECTION -->
-    <section class="projects" id="proyek">
-        <div class="container-wide">
-            <div class="section-header">
-                <span class="section-tag">PORTFOLIO</span>
-                <h2 class="section-title">Proyek Unggulan</h2>
-            </div>
-
-            <div class="project-filters">
-                <button class="filter-btn active" data-filter="all">Semua</button>
-                <button class="filter-btn" data-filter="web">Web App</button>
-                <button class="filter-btn" data-filter="mobile">Mobile/PWA</button>
-            </div>
-
-            <div class="projects-grid">
-                <div class="project-card" data-category="web">
-                    <div class="project-thumbnail">🛒</div>
-                    <div class="project-body">
-                        <h3 class="project-title">E-Commerce Platform</h3>
-                        <p class="project-description">Platform e-commerce dengan payment gateway dan analytics. 10,000+ transaksi/bulan.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">React</span>
-                            <span class="project-tag">Next.js</span>
-                            <span class="project-tag">Stripe</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link project-link-primary">Demo</a>
-                            <a href="#" class="project-link project-link-secondary">Code</a>
+                                <div class="floating-card floating-3 tilt-inner d-none d-md-flex">
+                                    <div class="fs-4">⭐</div>
+                                    <div>
+                                        <div class="small text-secondary">Sertifikat</div>
+                                        <div class="fw-bold">4+ (Dummy)</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="project-card" data-category="web">
-                    <div class="project-thumbnail">📊</div>
-                    <div class="project-body">
-                        <h3 class="project-title">Analytics Dashboard</h3>
-                        <p class="project-description">Dashboard real-time dengan visualisasi data interaktif menggunakan D3.js.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">TypeScript</span>
-                            <span class="project-tag">D3.js</span>
-                            <span class="project-tag">GraphQL</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link project-link-primary">Demo</a>
-                            <a href="#" class="project-link project-link-secondary">Code</a>
+                    <!-- Quick Value -->
+                    <div class="row g-3 mt-5 reveal">
+                        <div class="col-12 text-center text-secondary small">Nilai yang selalu saya bawa</div>
+                        <div class="col-12">
+                            <div class="d-flex flex-wrap justify-content-center gap-3">
+                                <div class="quick-value"><i class="bi bi-shield-check"></i> Aksesibilitas</div>
+                                <div class="quick-value"><i class="bi bi-rocket-takeoff"></i> Performa</div>
+                                <div class="quick-value"><i class="bi bi-puzzle"></i> Design System</div>
+                                <div class="quick-value"><i class="bi bi-code-square"></i> Type Safety</div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="project-card" data-category="mobile">
-                    <div class="project-thumbnail">📱</div>
-                    <div class="project-body">
-                        <h3 class="project-title">Task Management PWA</h3>
-                        <p class="project-description">Aplikasi PWA dengan offline-first architecture dan real-time collaboration. 500+ tim.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">React</span>
-                            <span class="project-tag">PWA</span>
-                            <span class="project-tag">Firebase</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link project-link-primary">Demo</a>
-                            <a href="#" class="project-link project-link-secondary">Code</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-category="web">
-                    <div class="project-thumbnail">🎨</div>
-                    <div class="project-body">
-                        <h3 class="project-title">Design System Library</h3>
-                        <p class="project-description">Component library dengan 50+ reusable components. Mempercepat development 50%.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">React</span>
-                            <span class="project-tag">Storybook</span>
-                            <span class="project-tag">TypeScript</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link project-link-primary">Demo</a>
-                            <a href="#" class="project-link project-link-secondary">Code</a>
+                    <!-- Tech Logos -->
+                    <div class="row g-3 mt-4 align-items-center reveal">
+                        <div class="col-12 text-center text-secondary small">Tech I enjoy working with</div>
+                        <div class="col-12 d-flex flex-wrap justify-content-center gap-3">
+                            <img src="https://placehold.co/92x32?text=React" alt="React (dummy)" class="opacity-75" loading="lazy" />
+                            <img src="https://placehold.co/92x32?text=TS" alt="TypeScript (dummy)" class="opacity-75" loading="lazy" />
+                            <img src="https://placehold.co/92x32?text=Next.js" alt="Next.js (dummy)" class="opacity-75" loading="lazy" />
+                            <img src="https://placehold.co/92x32?text=GraphQL" alt="GraphQL (dummy)" class="opacity-75" loading="lazy" />
+                            <img src="https://placehold.co/92x32?text=D3" alt="D3 (dummy)" class="opacity-75" loading="lazy" />
+                            <img src="https://placehold.co/92x32?text=Jest" alt="Jest (dummy)" class="opacity-75" loading="lazy" />
+                            <img src="https://placehold.co/92x32?text=Cypress" alt="Cypress (dummy)" class="opacity-75" loading="lazy" />
+                            <img src="https://placehold.co/92x32?text=Tailwind" alt="Tailwind (dummy)" class="opacity-75" loading="lazy" />
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- HOBBIES SECTION -->
-    <section class="hobbies" id="hobi">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">HOBI & MINAT</span>
-                <h2 class="section-title">Di Luar Coding</h2>
-            </div>
+            <!-- HIGHLIGHTS -->
+            <div class="py-5">
+                <div class="container">
+                    <div class="text-center mb-4 reveal">
+                        <span class="section-tag">HIGHLIGHTS</span>
+                        <h2 class="section-title h1 mt-3">Apa yang Saya Tawarkan</h2>
+                        <p class="text-secondary">Gabungan performa, aksesibilitas, dan DX yang menyenangkan.</p>
+                    </div>
 
-            <div class="hobbies-grid">
-                <div class="hobby-card" data-title="Fotografi" data-desc="Mengabadikan keindahan alam Indonesia">
-                    <div class="hobby-bg">📷</div>
-                    <div class="hobby-overlay">
-                        <h3 class="hobby-name">Fotografi</h3>
+                    <div class="row g-4">
+                        <template id="highlightTpl">
+              <div class="col-sm-6 col-lg-4 col-xxl-3 reveal">
+                <div class="card h-100 border-soft card-hover tilt position-relative">
+                  <div class="thumb ratio ratio-16x9">
+                    <img src="" alt="" loading="lazy">
+                  </div>
+                  <div class="card-body">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                      <span class="icon-wrap"><i class=""></i></span>
+                      <h5 class="mb-0 fw-bold title"></h5>
                     </div>
+                    <p class="text-secondary small mb-0 desc"></p>
+                  </div>
                 </div>
-                <div class="hobby-card" data-title="Bersepeda" data-desc="Menjelajahi kota dan trail">
-                    <div class="hobby-bg">🚴</div>
-                    <div class="hobby-overlay">
-                        <h3 class="hobby-name">Bersepeda</h3>
-                    </div>
-                </div>
-                <div class="hobby-card" data-title="Memasak" data-desc="Eksperimen dengan resep berbeda">
-                    <div class="hobby-bg">👨‍🍳</div>
-                    <div class="hobby-overlay">
-                        <h3 class="hobby-name">Memasak</h3>
-                    </div>
-                </div>
-                <div class="hobby-card" data-title="Membaca" data-desc="Tech books dan sci-fi novels">
-                    <div class="hobby-bg">📚</div>
-                    <div class="hobby-overlay">
-                        <h3 class="hobby-name">Membaca</h3>
-                    </div>
-                </div>
-                <div class="hobby-card" data-title="Gaming" data-desc="Strategy games dan puzzle solving">
-                    <div class="hobby-bg">🎮</div>
-                    <div class="hobby-overlay">
-                        <h3 class="hobby-name">Gaming</h3>
-                    </div>
-                </div>
-                <div class="hobby-card" data-title="Traveling" data-desc="Menjelajahi tempat dan budaya baru">
-                    <div class="hobby-bg">✈️</div>
-                    <div class="hobby-overlay">
-                        <h3 class="hobby-name">Traveling</h3>
+              </div>
+            </template>
+                        <div id="highlightGrid" class="row g-4"></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- CERTIFICATES SECTION -->
-    <section class="certificates" id="sertifikat">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">SERTIFIKASI</span>
-                <h2 class="section-title">Sertifikat & Penghargaan</h2>
-            </div>
-
-            <div class="certificates-grid">
-                <div class="cert-card">
-                    <span class="cert-badge">Professional</span>
-                    <h3 class="cert-title">Meta Front-End Developer</h3>
-                    <p class="cert-issuer">Meta (Coursera)</p>
-                    <p class="cert-date">September 2023</p>
-                    <a href="#" class="cert-link">🔗 Lihat</a>
-                </div>
-                <div class="cert-card">
-                    <span class="cert-badge">Cloud</span>
-                    <h3 class="cert-title">AWS Cloud Practitioner</h3>
-                    <p class="cert-issuer">Amazon Web Services</p>
-                    <p class="cert-date">Juni 2023</p>
-                    <a href="#" class="cert-link">🔗 Lihat</a>
-                </div>
-                <div class="cert-card">
-                    <span class="cert-badge">Design</span>
-                    <h3 class="cert-title">Google UX Design</h3>
-                    <p class="cert-issuer">Google (Coursera)</p>
-                    <p class="cert-date">Maret 2023</p>
-                    <a href="#" class="cert-link">🔗 Lihat</a>
-                </div>
-                <div class="cert-card">
-                    <span class="cert-badge">Framework</span>
-                    <h3 class="cert-title">React Complete Guide</h3>
-                    <p class="cert-issuer">Udemy</p>
-                    <p class="cert-date">Januari 2022</p>
-                    <a href="#" class="cert-link">🔗 Lihat</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section class="contact" id="kontak">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">KONTAK</span>
-                <h2 class="section-title">Mari Terhubung</h2>
-            </div>
-
-            <div class="contact-wrapper">
-                <div class="contact-form">
-                    <div class="success-message" id="successMessage">
-                        ✅ Terima kasih! Pesan Anda berhasil terkirim.
+            <!-- TESTIMONIALS -->
+            <div class="py-5 bg-soft">
+                <div class="container">
+                    <div class="text-center mb-4 reveal">
+                        <span class="section-tag">TESTIMONIALS (Dummy)</span>
+                        <h2 class="section-title h1 mt-3">Apa kata mereka</h2>
                     </div>
-
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Nama Lengkap</label>
-                            <input type="text" id="name" required placeholder="Masukkan nama Anda">
+                    <div class="row g-4">
+                        <div class="col-md-4 reveal">
+                            <div class="card card-hover h-100 border-soft">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center gap-3 mb-3">
+                                        <img src="https://placehold.co/64x64" class="rounded-circle" alt="" loading="lazy">
+                                        <div><strong>PM, TechCorp</strong><br><span class="text-secondary small">Dummy</span></div>
+                                    </div>
+                                    <p class="mb-0 text-secondary">“Delivery cepat dan perhatian pada detail UI/UX sangat membantu roadmap kami.”</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" required placeholder="nama@email.com">
+                        <div class="col-md-4 reveal">
+                            <div class="card card-hover h-100 border-soft">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center gap-3 mb-3">
+                                        <img src="https://placehold.co/64x64" class="rounded-circle" alt="" loading="lazy">
+                                        <div><strong>Lead Dev, Digital Solutions</strong><br><span class="text-secondary small">Dummy</span></div>
+                                    </div>
+                                    <p class="mb-0 text-secondary">“Codebase bersih, mudah di-scale, dan performanya mantap.”</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="message">Pesan</label>
-                            <textarea id="message" required placeholder="Tulis pesan Anda..."></textarea>
+                        <div class="col-md-4 reveal">
+                            <div class="card card-hover h-100 border-soft">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center gap-3 mb-3">
+                                        <img src="https://placehold.co/64x64" class="rounded-circle" alt="" loading="lazy">
+                                        <div><strong>Founder, Startup</strong><br><span class="text-secondary small">Dummy</span></div>
+                                    </div>
+                                    <p class="mb-0 text-secondary">“Kolaborasi enak, dokumentasi rapi, output di atas ekspektasi.”</p>
+                                </div>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">📨 Kirim</button>
-                    </form>
-                </div>
-
-                <div class="contact-info">
-                    <div class="contact-box" onclick="copyText('ezequiel@email.com')">
-                        <div class="contact-icon">📧</div>
-                        <div class="contact-label">Email</div>
-                        <div class="contact-value">tchudaezequiel@gmail.com</div>
                     </div>
-                    <div class="contact-box" onclick="copyText('+62 812-3456-7890')">
-                        <div class="contact-icon">📱</div>
-                        <div class="contact-label">Telepon</div>
-                        <div class="contact-value">+62 853-3260-2202</div>
-                    </div>
-                    <div class="contact-box">
-                        <div class="contact-icon">📍</div>
-                        <div class="contact-label">Lokasi</div>
-                        <div class="contact-value">Malang, Indonesia</div>
-                    </div>
-                </div>
-
-                <div class="social-links">
-                    <a href="https://linkedin.com/in/ezequiel" target="_blank" class="social-link">💼</a>
-                    <a href="https://github.com/ezequiel" target="_blank" class="social-link">🐙</a>
-                    <a href="https://twitter.com/ezequiel" target="_blank" class="social-link">🐦</a>
                 </div>
             </div>
-        </div>
-    </section>
+
+        </section>
+
+        <!-- TENTANG -->
+        <section id="page-tentang" class="page">
+            <div class="py-5">
+                <div class="container">
+                    <div class="text-center mb-5 reveal">
+                        <span class="section-tag">ABOUT ME</span>
+                        <h2 class="section-title h1 mt-3">Getting to know me better</h2>
+                    </div>
+
+                    <div class="row g-5 align-items-center">
+                        <div class="col-lg-5 reveal-left">
+                            <div class="ratio ratio-3x4 rounded-4 overflow-hidden" style="background:var(--accent-gradient);">
+                                <img src="about.png" alt="Tentang Ezequiel" class="w-100 h-100 object-fit-cover" loading="lazy" />
+                            </div>
+                        </div>
+                        <div class="col-lg-7 reveal-right">
+                            <h3 class="h4 mb-3">Pengembang Front-End yang Bersemangat</h3>
+                            <p class="text-secondary">
+                                Saya adalah seorang Front-End Developer dengan pengalaman lebih dari 3 tahun dalam membangun aplikasi web modern yang responsif dan user-friendly. Fokus utama saya adalah menciptakan pengalaman pengguna yang luar biasa melalui kode yang bersih dan maintainable.
+                            </p>
+                            <p class="text-secondary">
+                                Dengan keahlian mendalam dalam React, TypeScript, dan ekosistem JavaScript modern, saya selalu bersemangat untuk mempelajari teknologi baru dan menerapkan best practices dalam setiap proyek yang saya kerjakan.
+                            </p>
+
+                            <div class="row row-cols-1 row-cols-md-2 g-3 mt-1">
+                                <div class="col">
+                                    <div class="p-3 border-soft rounded-3 h-100">
+                                        <div class="small text-secondary">📍 Location</div>
+                                        <div class="fw-semibold">Malang, Indonesia</div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="p-3 border-soft rounded-3 h-100">
+                                        <div class="small text-secondary">📧 Email</div>
+                                        <div class="fw-semibold"><a href="mailto:tchudaezequiel@gmail.com" class="link-primary">tchudaezequiel@gmail.com</a></div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="p-3 border-soft rounded-3 h-100">
+                                        <div class="small text-secondary">📱 Phone number</div>
+                                        <div class="fw-semibold">+62 853-3260-2202</div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="p-3 border-soft rounded-3 h-100">
+                                        <div class="small text-secondary">💼 Status</div>
+                                        <div class="fw-semibold">Tersedia Freelance</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-primary mt-4 reveal" role="alert">
+                                <strong>Fun fact (Dummy):</strong> Pecinta komponen UI atomik & dokumentasi rapi.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PENGALAMAN -->
+        <section id="page-pengalaman" class="page">
+            <div class="py-5 bg-soft">
+                <div class="container">
+                    <div class="text-center mb-5 reveal">
+                        <span class="section-tag">PENGALAMAN</span>
+                        <h2 class="section-title h1 mt-3">Perjalanan Karir Saya</h2>
+                        <p class="text-secondary">Pengalaman profesional dalam membangun produk digital berkualitas tinggi</p>
+                    </div>
+
+                    <div class="timeline position-relative">
+                        <div class="position-relative mb-4 reveal">
+                            <span class="dot"></span>
+                            <div class="card border-soft card-hover tilt">
+                                <div class="card-body">
+                                    <div class="d-flex flex-wrap justify-content-between gap-2 align-items-start">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="https://placehold.co/48x48?text=T" class="rounded" alt="TechCorp (dummy)" loading="lazy">
+                                            <div>
+                                                <h5 class="mb-1 fw-bold">Senior Front-End Developer</h5>
+                                                <div class="text-primary fw-semibold">TechCorp Indonesia</div>
+                                            </div>
+                                        </div>
+                                        <div><span class="badge text-bg-light">Oct 2025 - Now</span></div>
+                                    </div>
+                                    <ul class="mt-3 mb-3 text-secondary">
+                                        <li>Memimpin pengembangan dashboard analytics yang meningkatkan engagement 45%</li>
+                                        <li>Optimasi performa aplikasi dengan code splitting, mengurangi loading time 57%</li>
+                                        <li>Mentoring 3 junior developer dalam React dan TypeScript best practices</li>
+                                        <li>Implementasi design system yang digunakan oleh 5 tim berbeda</li>
+                                    </ul>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <span class="badge text-bg-primary">React</span><span class="badge text-bg-primary">TypeScript</span><span class="badge text-bg-primary">Next.js</span><span class="badge text-bg-primary">GraphQL</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="position-relative mb-4 reveal">
+                            <span class="dot"></span>
+                            <div class="card border-soft card-hover tilt">
+                                <div class="card-body">
+                                    <div class="d-flex flex-wrap justify-content-between gap-2 align-items-start">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="https://placehold.co/48x48?text=D" class="rounded" alt="Digital Solutions (dummy)" loading="lazy">
+                                            <div>
+                                                <h5 class="mb-1 fw-bold">Front-End Developer</h5>
+                                                <div class="text-primary fw-semibold">Digital Solutions Ltd</div>
+                                            </div>
+                                        </div>
+                                        <div><span class="badge text-bg-light">Jun 2021 - Des 2022</span></div>
+                                    </div>
+                                    <ul class="mt-3 mb-3 text-secondary">
+                                        <li>Membangun e-commerce platform dengan 10,000+ transaksi bulanan</li>
+                                        <li>Implementasi PWA yang meningkatkan mobile engagement 60%</li>
+                                        <li>Kolaborasi dengan UI/UX untuk menciptakan pengalaman intuitif</li>
+                                    </ul>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <span class="badge text-bg-primary">React</span><span class="badge text-bg-primary">Redux</span><span class="badge text-bg-primary">SASS</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="position-relative reveal">
+                            <span class="dot"></span>
+                            <div class="card border-soft card-hover tilt">
+                                <div class="card-body">
+                                    <div class="d-flex flex-wrap justify-content-between gap-2 align-items-start">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="https://placehold.co/48x48?text=S" class="rounded" alt="Studio Creative (dummy)" loading="lazy">
+                                            <div>
+                                                <h5 class="mb-1 fw-bold">UI Engineer (Dummy)</h5>
+                                                <div class="text-primary fw-semibold">Studio Creative</div>
+                                            </div>
+                                        </div>
+                                        <div><span class="badge text-bg-light">2020 - 2021</span></div>
+                                    </div>
+                                    <ul class="mt-3 mb-3 text-secondary">
+                                        <li>Migrasi komponen ke design system internal</li>
+                                        <li>Setup Storybook dan visual regression test</li>
+                                    </ul>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <span class="badge text-bg-primary">Storybook</span><span class="badge text-bg-primary">Jest</span><span class="badge text-bg-primary">Cypress</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEAHLIAN -->
+        <section id="page-keahlian" class="page">
+            <div class="py-5">
+                <div class="container">
+                    <div class="text-center mb-5 reveal">
+                        <span class="section-tag">KEAHLIAN</span>
+                        <h2 class="section-title h1 mt-3">Teknologi &amp; Kompetensi</h2>
+                        <p class="text-secondary">Stack teknologi yang saya kuasai</p>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4 reveal">
+                            <div class="card h-100 border-soft card-hover text-center p-3 tilt">
+                                <div class="fs-1">⚛</div>
+                                <h3 class="h5 fw-bold mt-2 mb-3">Framework</h3>
+                                <div class="d-flex flex-wrap gap-2 justify-content-center">
+                                    <span class="badge text-bg-primary">React</span><span class="badge text-bg-primary">Next.js</span><span class="badge text-bg-primary">Vue.js</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 reveal">
+                            <div class="card h-100 border-soft card-hover text-center p-3 tilt">
+                                <div class="fs-1">🎨</div>
+                                <h3 class="h5 fw-bold mt-2 mb-3">Styling</h3>
+                                <div class="d-flex flex-wrap gap-2 justify-content-center">
+                                    <span class="badge text-bg-primary">Tailwind CSS</span><span class="badge text-bg-primary">SASS/SCSS</span><span class="badge text-bg-primary">Material-UI</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 reveal">
+                            <div class="card h-100 border-soft card-hover text-center p-3 tilt">
+                                <div class="fs-1">🔧</div>
+                                <h3 class="h5 fw-bold mt-2 mb-3">Tools</h3>
+                                <div class="d-flex flex-wrap gap-2 justify-content-center">
+                                    <span class="badge text-bg-primary">Git &amp; GitHub</span><span class="badge text-bg-primary">VS Code</span><span class="badge text-bg-primary">Docker</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 reveal">
+                            <div class="card h-100 border-soft card-hover text-center p-3 tilt">
+                                <div class="fs-1">✅</div>
+                                <h3 class="h5 fw-bold mt-2 mb-3">Testing</h3>
+                                <div class="d-flex flex-wrap gap-2 justify-content-center">
+                                    <span class="badge text-bg-primary">Jest</span><span class="badge text-bg-primary">Cypress</span><span class="badge text-bg-primary">ESLint</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 reveal">
+                            <div class="card h-100 border-soft card-hover text-center p-3 tilt">
+                                <div class="fs-1">🌐</div>
+                                <h3 class="h5 fw-bold mt-2 mb-3">API</h3>
+                                <div class="d-flex flex-wrap gap-2 justify-content-center">
+                                    <span class="badge text-bg-primary">REST API</span><span class="badge text-bg-primary">GraphQL</span><span class="badge text-bg-primary">Firebase</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 reveal">
+                            <div class="card h-100 border-soft card-hover text-center p-3 tilt">
+                                <div class="fs-1">🤝</div>
+                                <h3 class="h5 fw-bold mt-2 mb-3">Soft Skills</h3>
+                                <div class="d-flex flex-wrap gap-2 justify-content-center">
+                                    <span class="badge text-bg-primary">Problem Solving</span><span class="badge text-bg-primary">Kolaborasi Tim</span><span class="badge text-bg-primary">Agile/Scrum</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4 reveal">
+                        <span class="badge text-bg-secondary me-1">Performance</span>
+                        <span class="badge text-bg-secondary me-1">Accessibility</span>
+                        <span class="badge text-bg-secondary">DX (Developer Experience)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROYEK -->
+        <section id="page-proyek" class="page">
+            <div class="py-5 bg-soft">
+                <div class="container">
+                    <div class="text-center mb-4 reveal">
+                        <span class="section-tag">PORTFOLIO</span>
+                        <h2 class="section-title h1 mt-3">Proyek Unggulan</h2>
+                    </div>
+
+                    <div class="d-flex justify-content-center gap-2 flex-wrap mb-4 reveal">
+                        <button class="btn btn-outline-secondary active" data-filter="all">Semua</button>
+                        <button class="btn btn-outline-secondary" data-filter="web">Web App</button>
+                        <button class="btn btn-outline-secondary" data-filter="mobile">Mobile/PWA</button>
+                    </div>
+
+                    <div class="row g-4" id="projectsGrid">
+                        <div class="col-md-6 col-lg-4 project-card reveal" data-category="web" data-title="E-Commerce Platform" data-desc="Platform e-commerce dengan payment gateway dan analytics. 10,000+ transaksi/bulan." data-tags="React,Next.js,Stripe">
+                            <div class="card h-100 card-hover tilt">
+                                <div class="thumb ratio ratio-16x9"><img src="https://placehold.co/800x450/png?text=E-Commerce" alt="E-Commerce (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <h5 class="fw-bold">E-Commerce Platform</h5>
+                                    <p class="text-secondary">Platform e-commerce dengan payment gateway dan analytics. 10,000+ transaksi/bulan.</p>
+                                    <div class="d-flex flex-wrap gap-2 mb-3"><span class="badge text-bg-primary">React</span><span class="badge text-bg-primary">Next.js</span><span class="badge text-bg-primary">Stripe</span></div>
+                                    <div class="d-flex gap-2">
+                                        <a href="#" class="btn btn-primary flex-grow-1">Demo</a>
+                                        <a href="#" class="btn btn-outline-primary flex-grow-1">Code</a>
+                                        <button class="btn btn-outline-secondary" data-project-detail>Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 project-card reveal" data-category="web" data-title="Analytics Dashboard" data-desc="Dashboard real-time dengan visualisasi data interaktif menggunakan D3.js." data-tags="TypeScript,D3.js,GraphQL">
+                            <div class="card h-100 card-hover tilt">
+                                <div class="thumb ratio ratio-16x9"><img src="https://placehold.co/800x450/png?text=Analytics" alt="Analytics (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <h5 class="fw-bold">Analytics Dashboard</h5>
+                                    <p class="text-secondary">Dashboard real-time dengan visualisasi data interaktif menggunakan D3.js.</p>
+                                    <div class="d-flex flex-wrap gap-2 mb-3"><span class="badge text-bg-primary">TypeScript</span><span class="badge text-bg-primary">D3.js</span><span class="badge text-bg-primary">GraphQL</span></div>
+                                    <div class="d-flex gap-2">
+                                        <a href="#" class="btn btn-primary flex-grow-1">Demo</a>
+                                        <a href="#" class="btn btn-outline-primary flex-grow-1">Code</a>
+                                        <button class="btn btn-outline-secondary" data-project-detail>Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 project-card reveal" data-category="mobile" data-title="Task Management PWA" data-desc="Aplikasi PWA dengan offline-first architecture dan real-time collaboration. 500+ tim." data-tags="React,PWA,Firebase">
+                            <div class="card h-100 card-hover tilt">
+                                <div class="thumb ratio ratio-16x9"><img src="https://placehold.co/800x450/png?text=PWA" alt="PWA (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <h5 class="fw-bold">Task Management PWA</h5>
+                                    <p class="text-secondary">Aplikasi PWA dengan offline-first architecture dan real-time collaboration. 500+ tim.</p>
+                                    <div class="d-flex flex-wrap gap-2 mb-3"><span class="badge text-bg-primary">React</span><span class="badge text-bg-primary">PWA</span><span class="badge text-bg-primary">Firebase</span></div>
+                                    <div class="d-flex gap-2">
+                                        <a href="#" class="btn btn-primary flex-grow-1">Demo</a>
+                                        <a href="#" class="btn btn-outline-primary flex-grow-1">Code</a>
+                                        <button class="btn btn-outline-secondary" data-project-detail>Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 project-card reveal" data-category="web" data-title="Design System Library" data-desc="Component library dengan 50+ reusable components. Mempercepat development 50%." data-tags="React,Storybook,TypeScript">
+                            <div class="card h-100 card-hover tilt">
+                                <div class="thumb ratio-21x9"><img src="https://placehold.co/1000x480/png?text=Design+System" alt="Design System (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <h5 class="fw-bold">Design System Library</h5>
+                                    <p class="text-secondary">Component library dengan 50+ reusable components. Mempercepat development 50%.</p>
+                                    <div class="d-flex flex-wrap gap-2 mb-3"><span class="badge text-bg-primary">React</span><span class="badge text-bg-primary">Storybook</span><span class="badge text-bg-primary">TypeScript</span></div>
+                                    <div class="d-flex gap-2">
+                                        <a href="#" class="btn btn-primary flex-grow-1">Demo</a>
+                                        <a href="#" class="btn btn-outline-primary flex-grow-1">Code</a>
+                                        <button class="btn btn-outline-secondary" data-project-detail>Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dummy extras -->
+                        <div class="col-md-6 col-lg-4 project-card reveal" data-category="web" data-title="Blog Platform (Dummy)" data-desc="Blog multi-penulis dengan editor markdown dan preview live." data-tags="Next.js,Prisma,Postgres">
+                            <div class="card h-100 card-hover tilt">
+                                <div class="thumb ratio ratio-16x9"><img src="https://placehold.co/800x450/png?text=Blog" alt="Blog (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <h5 class="fw-bold">Blog Platform (Dummy)</h5>
+                                    <p class="text-secondary">Blog multi-penulis dengan editor markdown dan preview live.</p>
+                                    <div class="d-flex flex-wrap gap-2 mb-3"><span class="badge text-bg-primary">Next.js</span><span class="badge text-bg-primary">Prisma</span><span class="badge text-bg-primary">Postgres</span></div>
+                                    <div class="d-flex gap-2">
+                                        <a href="#" class="btn btn-primary flex-grow-1">Demo</a>
+                                        <a href="#" class="btn btn-outline-primary flex-grow-1">Code</a>
+                                        <button class="btn btn-outline-secondary" data-project-detail>Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 project-card reveal" data-category="mobile" data-title="Chat App (Dummy)" data-desc="Obrolan realtime dengan WebSocket & push notification." data-tags="React,Socket.IO,Vite">
+                            <div class="card h-100 card-hover tilt">
+                                <div class="thumb ratio ratio-16x9"><img src="https://placehold.co/800x450/png?text=Chat" alt="Chat (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <h5 class="fw-bold">Chat App (Dummy)</h5>
+                                    <p class="text-secondary">Obrolan realtime dengan WebSocket &amp; push notification.</p>
+                                    <div class="d-flex flex-wrap gap-2 mb-3"><span class="badge text-bg-primary">React</span><span class="badge text-bg-primary">Socket.IO</span><span class="badge text-bg-primary">Vite</span></div>
+                                    <div class="d-flex gap-2">
+                                        <a href="#" class="btn btn-primary flex-grow-1">Demo</a>
+                                        <a href="#" class="btn btn-outline-primary flex-grow-1">Code</a>
+                                        <button class="btn btn-outline-secondary" data-project-detail>Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Project Detail Modal -->
+                    <div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="projectTitle"></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="thumb ratio ratio-16x9 mb-3"><img id="projectImg" src="" alt="" loading="lazy"></div>
+                                    <p id="projectDesc" class="text-secondary"></p>
+                                    <div id="projectTags" class="d-flex flex-wrap gap-2"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn btn-primary">Demo</a>
+                                    <a href="#" class="btn btn-outline-primary">Code</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- HOBI -->
+        <section id="page-hobi" class="page">
+            <div class="py-5">
+                <div class="container">
+                    <div class="text-center mb-5 reveal">
+                        <span class="section-tag">HOBBIES &amp; INTERESTS</span>
+                        <h2 class="section-title h1 mt-3">Beyond Coding</h2>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Data asli dipertahankan -->
+                        <div class="col-6 col-md-4 reveal">
+                            <div class="card h-100 card-hover hobby-card cursor-pointer" data-icon="📷" data-title="Fotografi" data-desc="Mengabadikan keindahan alam Indonesia">
+                                <div class="thumb ratio ratio-1x1"><img src="https://placehold.co/600x600/png?text=Photography" alt="Photography (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <h5 class="mb-0">Photography</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 reveal">
+                            <div class="card h-100 card-hover hobby-card cursor-pointer" data-icon="🚴" data-title="Bersepeda" data-desc="Menjelajahi kota dan trail">
+                                <div class="thumb ratio ratio-1x1"><img src="https://placehold.co/600x600/png?text=Cycling" alt="Cycling (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <h5 class="mb-0">Cyling</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 reveal">
+                            <div class="card h-100 card-hover hobby-card cursor-pointer" data-icon="👨‍🍳" data-title="Memasak" data-desc="Eksperimen dengan resep berbeda">
+                                <div class="thumb ratio ratio-1x1"><img src="https://placehold.co/600x600/png?text=Cooking" alt="Cooking (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <h5 class="mb-0">Cook</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 reveal">
+                            <div class="card h-100 card-hover hobby-card cursor-pointer" data-icon="📚" data-title="Membaca" data-desc="Tech books dan sci-fi novels">
+                                <div class="thumb ratio ratio-1x1"><img src="https://placehold.co/600x600/png?text=Reading" alt="Reading (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <h5 class="mb-0">Read</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 reveal">
+                            <div class="card h-100 card-hover hobby-card cursor-pointer" data-icon="🎮" data-title="Gaming" data-desc="Strategy games dan puzzle solving">
+                                <div class="thumb ratio ratio-1x1"><img src="https://placehold.co/600x600/png?text=Gaming" alt="Gaming (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <h5 class="mb-0">Play football</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4 reveal">
+                            <div class="card h-100 card-hover hobby-card cursor-pointer" data-icon="✈" data-title="Traveling" data-desc="Menjelajahi tempat dan budaya baru">
+                                <div class="thumb ratio ratio-1x1"><img src="https://placehold.co/600x600/png?text=Travel" alt="Travel (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <h5 class="mb-0">Traveling</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal Hobby -->
+                    <div class="modal fade" id="hobbyModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="hobbyTitle"></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <div id="hobbyIcon" class="display-1 mb-2"></div>
+                                    <p id="hobbyDesc" class="mb-0 text-secondary"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SERTIFIKAT -->
+        <section id="page-sertifikat" class="page">
+            <div class="py-5 bg-soft">
+                <div class="container">
+                    <div class="text-center mb-5 reveal">
+                        <span class="section-tag">CERTIFICATION</span>
+                        <h2 class="section-title h1 mt-3">Certificates &amp; Awards</h2>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4 reveal">
+                            <div class="card h-100 border-soft card-hover position-relative">
+                                <div class="ribbon">Verified (Dummy)</div>
+                                <div class="thumb ratio ratio-16x9"><img src="https://placehold.co/800x450/png?text=Meta+Front-End+Developer" alt="Meta Front-End Developer (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <span class="badge text-bg-primary mb-2">Professional</span>
+                                    <h5 class="fw-bold">Meta Front-End Developer</h5>
+                                    <div class="text-primary fw-semibold">Meta (Coursera)</div>
+                                    <div class="text-secondary small">September 2023</div>
+                                    <a href="#" class="mt-2 d-inline-flex align-items-center gap-1 link-primary">🔗 Lihat</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 reveal">
+                            <div class="card h-100 border-soft card-hover position-relative">
+                                <div class="ribbon">Verified (Dummy)</div>
+                                <div class="thumb ratio ratio-16x9"><img src="https://placehold.co/800x450/png?text=AWS+Cloud+Practitioner" alt="AWS Cloud Practitioner (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <span class="badge text-bg-primary mb-2">Cloud</span>
+                                    <h5 class="fw-bold">AWS Cloud Practitioner</h5>
+                                    <div class="text-primary fw-semibold">Amazon Web Services</div>
+                                    <div class="text-secondary small">Juni 2023</div>
+                                    <a href="#" class="mt-2 d-inline-flex align-items-center gap-1 link-primary">🔗 Lihat</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 reveal">
+                            <div class="card h-100 border-soft card-hover position-relative">
+                                <div class="ribbon">Verified (Dummy)</div>
+                                <div class="thumb ratio ratio-16x9"><img src="https://placehold.co/800x450/png?text=Google+UX+Design" alt="Google UX Design (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <span class="badge text-bg-primary mb-2">Design</span>
+                                    <h5 class="fw-bold">Google UX Design</h5>
+                                    <div class="text-primary fw-semibold">Google (Coursera)</div>
+                                    <div class="text-secondary small">Maret 2023</div>
+                                    <a href="#" class="mt-2 d-inline-flex align-items-center gap-1 link-primary">🔗 Lihat</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 reveal">
+                            <div class="card h-100 border-soft card-hover position-relative">
+                                <div class="ribbon">Verified (Dummy)</div>
+                                <div class="thumb ratio ratio-16x9"><img src="https://placehold.co/800x450/png?text=React+Complete+Guide" alt="React Complete Guide (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <span class="badge text-bg-primary mb-2">Framework</span>
+                                    <h5 class="fw-bold">React Complete Guide</h5>
+                                    <div class="text-primary fw-semibold">Udemy</div>
+                                    <div class="text-secondary small">Januari 2022</div>
+                                    <a href="#" class="mt-2 d-inline-flex align-items-center gap-1 link-primary">🔗 Lihat</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 reveal">
+                            <div class="card h-100 border-soft card-hover position-relative">
+                                <div class="ribbon">Verified (Dummy)</div>
+                                <div class="thumb ratio ratio-16x9"><img src="https://placehold.co/800x450/png?text=Frontend+Mentor+Award" alt="Frontend Mentor Award (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <span class="badge text-bg-info mb-2">Dummy</span>
+                                    <h5 class="fw-bold">Frontend Mentor Challenge</h5>
+                                    <div class="text-primary fw-semibold">Community Award</div>
+                                    <div class="text-secondary small">2024</div>
+                                    <a href="#" class="mt-2 d-inline-flex align-items-center gap-1 link-primary">🔗 Lihat</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4 reveal">
+                            <div class="card h-100 border-soft card-hover position-relative">
+                                <div class="ribbon">Verified (Dummy)</div>
+                                <div class="thumb ratio ratio-16x9"><img src="https://placehold.co/800x450/png?text=Best+UI+Component" alt="Best UI Component (dummy)" loading="lazy"></div>
+                                <div class="card-body">
+                                    <span class="badge text-bg-info mb-2">Dummy</span>
+                                    <h5 class="fw-bold">Best UI Component</h5>
+                                    <div class="text-primary fw-semibold">Local Tech Fest</div>
+                                    <div class="text-secondary small">2023</div>
+                                    <a href="#" class="mt-2 d-inline-flex align-items-center gap-1 link-primary">🔗 Lihat</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- KONTAK -->
+        <section id="page-kontak" class="page">
+            <div class="py-5">
+                <div class="container">
+                    <div class="text-center mb-5 reveal">
+                        <span class="section-tag">CONTACT</span>
+                        <h2 class="section-title h1 mt-3">Let's Connect</h2>
+                    </div>
+
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-lg-7 reveal">
+                            <div class="card border-soft card-hover">
+                                <div class="card-body p-4">
+                                    <div class="alert alert-success d-none" id="successMessage">✅ Terima kasih! Pesan Anda berhasil terkirim.</div>
+                                    <form id="contactForm" class="needs-validation" novalidate>
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Full Name</label>
+                                            <input type="text" id="name" class="form-control" placeholder="Ezequiel Alaghate Tchuda" required />
+                                            <div class="invalid-feedback">Nama wajib diisi.</div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">E-mail</label>
+                                            <input type="email" id="email" class="form-control" placeholder="tchudaezequiel@gmail.com" required />
+                                            <div class="invalid-feedback">Email valid wajib diisi.</div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="message" class="form-label">Message</label>
+                                            <textarea id="message" class="form-control" rows="4" placeholder="Error 404: Sleep not found. Welcome to my passion project." required></textarea>
+                                            <div class="invalid-feedback">Pesan tidak boleh kosong.</div>
+                                        </div>
+                                        <button type="submit" class="btn btn-gradient w-100">📨 Kirim</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Map & Info -->
+                        <div class="col-lg-5 reveal">
+                            <div class="card border-soft card-hover mb-3">
+                                <div class="thumb ratio ratio-16x9"><img src="https://placehold.co/1000x600/png?text=Map+Malang+%28Dummy%29" alt="Map dummy" loading="lazy"></div>
+                                <div class="card-body">
+                                    <div class="row row-cols-1 row-cols-md-3 g-3">
+                                        <div class="col">
+                                            <div class="p-3 border-soft rounded-3 text-center h-100 cursor-pointer" data-copy="tchudaezequiel@gmail.com">
+                                                <div class="fs-2">📧</div>
+                                                <div class="small text-secondary">Email</div>
+                                                <div class="fw-semibold">tchudaezequiel@gmail.com</div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="p-3 border-soft rounded-3 text-center h-100 cursor-pointer" data-copy="+62 853-3260-2202">
+                                                <div class="fs-2">📱</div>
+                                                <div class="small text-secondary">Phone number</div>
+                                                <div class="fw-semibold">+62 853-3260-2202</div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="p-3 border-soft rounded-3 text-center h-100">
+                                                <div class="fs-2">📍</div>
+                                                <div class="small text-secondary">Location</div>
+                                                <div class="fw-semibold">Malang, Indonesia</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FAQ (dummy) -->
+                            <div class="accordion border-soft card-hover" id="faq">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#f1">Apakah tersedia untuk freelance?</button></h2>
+                                    <div id="f1" class="accordion-collapse collapse show" data-bs-parent="#faq">
+                                        <div class="accordion-body text-secondary">Ya, status: <strong>Tersedia Freelance</strong>.</div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f2">Stack utama?</button></h2>
+                                    <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faq">
+                                        <div class="accordion-body text-secondary">React, TypeScript, Next.js, GraphQL.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Toast copy -->
+                    <div class="position-fixed bottom-0 start-50 translate-middle-x p-3" style="z-index:1080">
+                        <div id="copyToast" class="toast align-items-center text-bg-success border-0" role="status" aria-live="assertive" aria-atomic="true">
+                            <div class="d-flex">
+                                <div class="toast-body">✅ Disalin!</div>
+                                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Tutup"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 404 -->
+        <section id="page-404" class="page">
+            <div class="py-5">
+                <div class="container text-center">
+                    <h1 class="display-6 fw-bold">404</h1>
+                    <p class="text-secondary">Halaman tidak ditemukan.</p>
+                    <a class="btn btn-primary" href="#/beranda">Kembali ke Beranda</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <button class="scroll-top-btn" id="scrollTop">↑</button>
-                <p class="footer-text">&copy; 2025 Ezequiel. Dibuat dengan </p>
-                <div class="social-links">
-                    <a href="https://linkedin.com/in/ezequiel" target="_blank" class="social-link">💼</a>
-                    <a href="https://github.com/ezequiel" target="_blank" class="social-link">🐙</a>
-                </div>
+    <footer class="border-top py-4 bg-body">
+        <div class="container text-center">
+            <button id="scrollTop" class="btn btn-gradient rounded-circle mb-3" style="width:48px;height:48px;" aria-label="Kembali ke atas">↑</button>
+            <p class="mb-2 text-secondary mb-0">&copy; 2025 Ezequiel Alaghate Tchuda.</p>
+            <div class="d-flex justify-content-center gap-2">
+                <a href="https://linkedin.com/in/ezequiel" target="_blank" class="btn btn-outline-secondary rounded-circle p-0" style="width:44px;height:44px;" aria-label="LinkedIn">💼</a>
+                <a href="https://github.com/ezequiel" target="_blank" class="btn btn-outline-secondary rounded-circle p-0" style="width:44px;height:44px;" aria-label="GitHub">🐙</a>
             </div>
         </div>
     </footer>
 
-    <!-- MODAL LIGHTBOX -->
-    <div class="modal" id="modal">
-        <button class="modal-close" id="modalClose">×</button>
-        <div class="modal-content">
-            <div class="modal-icon" id="modalIcon"></div>
-            <h2 class="modal-title" id="modalTitle"></h2>
-            <p class="modal-description" id="modalDesc"></p>
-        </div>
-    </div>
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // ========== THEME SWITCHER ==========
-        const themeSwitcher = document.getElementById('themeSwitcher');
-        const html = document.documentElement;
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        html.setAttribute('data-theme', savedTheme);
-        themeSwitcher.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        /* ================== THEME ================== */
+        const themeToggle = document.getElementById('themeToggle');
 
-        themeSwitcher.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            themeSwitcher.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        function setTheme(mode) {
+            document.documentElement.setAttribute('data-bs-theme', mode);
+            localStorage.setItem('theme', mode);
+            themeToggle.innerHTML = mode === 'dark' ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon"></i>';
+        }
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme(savedTheme);
+        themeToggle.addEventListener('click', () => {
+            const now = document.documentElement.getAttribute('data-bs-theme');
+            setTheme(now === 'dark' ? 'light' : 'dark');
         });
 
-        // ========== MOBILE MENU ==========
-        const burger = document.getElementById('burger');
-        const navLinks = document.getElementById('navLinks');
+        /* ================== ROUTER ================== */
+        const ROUTES = ['beranda', 'tentang', 'pengalaman', 'keahlian', 'proyek', 'hobi', 'sertifikat', 'kontak'];
+        const pages = Object.fromEntries(ROUTES.map(r => [r, document.getElementById('page-' + r)]));
+        const page404 = document.getElementById('page-404');
 
-        burger.addEventListener('click', () => {
-            burger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-
-        // Close menu on link click
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                burger.classList.remove('active');
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // ========== SMOOTH SCROLL & ACTIVE NAV ==========
-        const sections = document.querySelectorAll('section');
-        const navItems = document.querySelectorAll('.nav-links a');
-
-        // Active link on scroll
-        function updateActiveLink() {
-            let current = '';
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                const sectionHeight = section.offsetHeight;
-
-                if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navItems.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
+        function getRoute() {
+            let h = location.hash.replace('#/', '').replace('#', '').trim();
+            if (!h) h = 'beranda';
+            return ROUTES.includes(h) ? h : '404';
         }
 
-        window.addEventListener('scroll', updateActiveLink);
-
-        // ========== HEADER SCROLL EFFECT ==========
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
+        function render() {
+            const r = getRoute();
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            if (r === '404') {
+                page404.classList.add('active');
             } else {
-                header.classList.remove('scrolled');
+                pages[r].classList.add('active');
             }
-        });
 
-        // ========== INTERSECTION OBSERVER ==========
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+            document.querySelectorAll('[data-route-link]').forEach(a => {
+                const ok = a.getAttribute('href') === '#/' + r;
+                a.classList.toggle('active', ok);
+                a.setAttribute('aria-current', ok ? 'page' : '');
             });
-        }, observerOptions);
 
-        sections.forEach(section => {
-            observer.observe(section);
-        });
+            // Move active bar (desktop)
+            positionNavActiveBar();
 
-        // ========== PROJECT FILTERS ==========
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const projectCards = document.querySelectorAll('.project-card');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const filter = btn.getAttribute('data-filter');
-                projectCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
-            });
-        });
-
-        // ========== HOBBY LIGHTBOX ==========
-        const hobbyCards = document.querySelectorAll('.hobby-card');
-        const modal = document.getElementById('modal');
-        const modalClose = document.getElementById('modalClose');
-        const modalIcon = document.getElementById('modalIcon');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalDesc = document.getElementById('modalDesc');
-
-        hobbyCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const icon = card.querySelector('.hobby-bg').textContent;
-                const title = card.getAttribute('data-title');
-                const desc = card.getAttribute('data-desc');
-                modalIcon.textContent = icon;
-                modalTitle.textContent = title;
-                modalDesc.textContent = desc;
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-
-        modalClose.addEventListener('click', () => {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
+            const canvas = bootstrap.Offcanvas.getInstance(document.getElementById('offcanvasNav'));
+            if (canvas) {
+                canvas.hide();
             }
-        });
-
-        // ========== CONTACT FORM ==========
-        const contactForm = document.getElementById('contactForm');
-        const successMessage = document.getElementById('successMessage');
-
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            successMessage.classList.add('show');
-            contactForm.reset();
-            setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 5000);
-        });
-
-        // ========== COPY TO CLIPBOARD ==========
-        function copyText(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const notif = document.createElement('div');
-                notif.textContent = '✅ Disalin!';
-                notif.style.cssText = `
-                    position: fixed;
-                    bottom: 2rem;
-                    right: 2rem;
-                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                    color: white;
-                    padding: 1rem 2rem;
-                    border-radius: 10px;
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-                    z-index: 99999;
-                    font-weight: 600;
-                `;
-                document.body.appendChild(notif);
-                setTimeout(() => {
-                    document.body.removeChild(notif);
-                }, 2000);
-            });
-        }
-
-        // ========== SCROLL TO TOP ==========
-        document.getElementById('scrollTop').addEventListener('click', () => {
+            const pretty = r === '404' ? 'Halaman tidak ditemukan' : r.charAt(0).toUpperCase() + r.slice(1);
+            document.title = `Ezequiel - ${pretty}`;
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
+        }
+        window.addEventListener('hashchange', render);
+        window.addEventListener('DOMContentLoaded', render);
+
+        /* ================== NAV ACTIVE BAR ================== */
+        const navBarEl = document.getElementById('navActiveBar');
+
+        function positionNavActiveBar() {
+            const rail = document.querySelector('.nav-rail');
+            if (!rail || !navBarEl) return;
+            const active = rail.querySelector('.nav-link.active');
+            if (!active) {
+                navBarEl.style.width = '0px';
+                return;
+            }
+            const railRect = rail.getBoundingClientRect();
+            const aRect = active.getBoundingClientRect();
+            const left = aRect.left - railRect.left + 8; // match ::after left
+            const width = aRect.width - 16;
+            navBarEl.style.transform = `translateX(${left}px)`;
+            navBarEl.style.width = `${width}px`;
+        }
+        window.addEventListener('resize', () => {
+            positionNavActiveBar();
         });
 
-        // Initialize
-        updateActiveLink();
+        /* ================== SCROLL PROGRESS ================== */
+        const progress = document.getElementById('scrollProgress');
+
+        function updateProgress() {
+            const h = document.documentElement;
+            const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+            progress.style.width = scrolled + '%';
+        }
+        document.addEventListener('scroll', updateProgress);
+
+        /* ================== REVEAL ON SCROLL ================== */
+        const revealObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('show');
+                    revealObs.unobserve(e.target);
+                }
+            });
+        }, {
+            threshold: .12,
+            rootMargin: '0px 0px -10% 0px'
+        });
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObs.observe(el));
+
+        /* ================== TILT ================== */
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!prefersReduced) {
+            document.querySelectorAll('.tilt').forEach(card => {
+                let rID = null;
+
+                function onMove(e) {
+                    const b = card.getBoundingClientRect();
+                    const px = (e.clientX - b.left) / b.width,
+                        py = (e.clientY - b.top) / b.height;
+                    const rx = (py - .5) * 8,
+                        ry = (px - .5) * -8;
+                    cancelAnimationFrame(rID);
+                    rID = requestAnimationFrame(() => card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`);
+                }
+
+                function reset() {
+                    card.style.transform = '';
+                }
+                card.addEventListener('mousemove', onMove);
+                card.addEventListener('mouseleave', reset);
+            });
+        }
+
+        /* ================== HIGHLIGHTS DATA (INI YANG MENAMPILKAN KARTU) ================== */
+        (function() {
+            const highlights = [{
+                img: 'https://placehold.co/800x450/png?text=Design+System',
+                icon: 'bi bi-easel2',
+                title: 'Design System',
+                desc: 'Library komponen konsisten & scalable (Dummy).'
+            }, {
+                img: 'https://placehold.co/800x450/png?text=Performance',
+                icon: 'bi bi-speedometer2',
+                title: 'Performance',
+                desc: 'Code-splitting, prefetch, dan lazy routes (Dummy).'
+            }, {
+                img: 'https://placehold.co/800x450/png?text=Accessibility',
+                icon: 'bi bi-universal-access',
+                title: 'Accessibility',
+                desc: 'Fokus ring, semantic landmarks, ARIA (Dummy).'
+            }, {
+                img: 'https://placehold.co/800x450/png?text=Animations',
+                icon: 'bi bi-stars',
+                title: 'Micro-interactions',
+                desc: 'Motion halus yang natural (Dummy).'
+            }, {
+                img: 'https://placehold.co/800x450/png?text=TypeScript',
+                icon: 'bi bi-code-slash',
+                title: 'TypeScript Strict',
+                desc: 'Sistem tipe ketat untuk DX mantap (Dummy).'
+            }, {
+                img: 'https://placehold.co/800x450/png?text=Testing',
+                icon: 'bi bi-clipboard-check',
+                title: 'Testing Coverage',
+                desc: 'Unit, e2e, & visual regression (Dummy).'
+            }, {
+                img: 'https://placehold.co/800x450/png?text=SEO+%26+PWA',
+                icon: 'bi bi-search',
+                title: 'SEO & PWA',
+                desc: 'Lighthouse hijau, offline-ready (Dummy).'
+            }, {
+                img: 'https://placehold.co/800x450/png?text=CI%2FCD',
+                icon: 'bi bi-git',
+                title: 'CI/CD',
+                desc: 'Preview PR & pipelines cepat (Dummy).'
+            }, ];
+            const tpl = document.getElementById('highlightTpl');
+            const grid = document.getElementById('highlightGrid');
+            if (!tpl || !grid) return;
+            const frag = document.createDocumentFragment();
+            highlights.forEach(h => {
+                const node = tpl.content.cloneNode(true);
+                node.querySelector('.title').textContent = h.title;
+                node.querySelector('.desc').textContent = h.desc;
+                node.querySelector('.icon-wrap i').className = h.icon;
+                const img = node.querySelector('img');
+                img.src = h.img;
+                img.alt = h.title + ' (dummy)';
+                frag.appendChild(node);
+            });
+            grid.appendChild(frag);
+            grid.querySelectorAll('.reveal').forEach(el => revealObs.observe(el)); // animasikan juga
+        })();
+
+        /* ================== PROJECT FILTERS ================== */
+        const filterBtns = document.querySelectorAll('[data-filter]');
+        const projectCards = document.querySelectorAll('.project-card');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const f = btn.dataset.filter;
+                projectCards.forEach(card => {
+                    const show = (f === 'all') || (card.dataset.category === f);
+                    card.classList.toggle('d-none', !show);
+                });
+            });
+        });
+
+        /* ================== PROJECT MODAL ================== */
+        const pModal = new bootstrap.Modal('#projectModal');
+        document.getElementById('projectsGrid').addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-project-detail]');
+            if (!btn) return;
+            const card = btn.closest('.project-card');
+            const title = card.dataset.title,
+                desc = card.dataset.desc,
+                tags = (card.dataset.tags || '').split(',');
+            const imgEl = card.querySelector('.thumb img');
+            document.getElementById('projectTitle').textContent = title;
+            document.getElementById('projectDesc').textContent = desc;
+            document.getElementById('projectImg').src = imgEl ? imgEl.src : '';
+            const tagBox = document.getElementById('projectTags');
+            tagBox.innerHTML = '';
+            tags.filter(Boolean).forEach(t => {
+                const b = document.createElement('span');
+                b.className = 'badge text-bg-primary';
+                b.textContent = t.trim();
+                tagBox.appendChild(b);
+            });
+            pModal.show();
+        });
+
+        /* ================== HOBBY MODAL ================== */
+        const hobbyModal = new bootstrap.Modal('#hobbyModal');
+        document.querySelectorAll('.hobby-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.getElementById('hobbyTitle').textContent = card.dataset.title || '';
+                document.getElementById('hobbyIcon').textContent = card.dataset.icon || '✨';
+                document.getElementById('hobbyDesc').textContent = card.dataset.desc || '';
+                hobbyModal.show();
+            });
+        });
+
+        /* ================== CONTACT FORM ================== */
+        (function() {
+            const form = document.getElementById('contactForm');
+            const success = document.getElementById('successMessage');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (!form.checkValidity()) {
+                    e.stopPropagation();
+                } else {
+                    success.classList.remove('d-none');
+                    form.reset();
+                    setTimeout(() => success.classList.add('d-none'), 5000);
+                }
+                form.classList.add('was-validated');
+            });
+        })();
+
+        /* ================== COPY TO CLIPBOARD ================== */
+        const toast = new bootstrap.Toast(document.getElementById('copyToast'), {
+            delay: 1500
+        });
+        document.querySelectorAll('[data-copy]').forEach(el => {
+            el.addEventListener('click', async() => {
+                try {
+                    await navigator.clipboard.writeText(el.dataset.copy);
+                    toast.show();
+                } catch (e) {
+                    alert('Gagal menyalin');
+                }
+            });
+        });
+
+        /* ================== SCROLL TOP ================== */
+        document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        }));
     </script>
 </body>
 
